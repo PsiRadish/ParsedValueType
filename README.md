@@ -1,45 +1,37 @@
 # Parsed\<T\> Structure #
 
-Encapsulation of value-type parsing that mirrors the Nullable\<T\> "interface".
+Encapsulation of value-type parsing that mirrors the [Nullable\<T\>](https://msdn.microsoft.com/en-us/library/b3h38hb0.aspx) "interface".  
+  
+Directly assign a [System.String](https://msdn.microsoft.com/en-us/library/system.string.aspx) value to a Parsed\<T\> to initiate parsing of the string. If successful, Parsed\<T\>.HasValue will be `true` and Parsed\<T\>.Value will return the parsed T value. 
 
-## Usage
 
-Directly assign a [[|T:System.String]] value to a Parsed\<T\> to initiate parsing of the string. If successful, Parsed\<T\>.HasValue will be true and [[|P:Gardiant.CaseManagement.Util.Parsed\<T\>.Value]] will return the parsed [[|!:T]] value. 
+## Syntax
+```cs
+[Serializable]
+public struct Parsed<T> : IComparable<Parsed<T>>
+where T: struct
+```
+#### Type Parameters
+<dl>
+  <dt>T</dt>
+  <dd>The underlying value type to parse to.</dd>
+</dl>
 
-## Type Parameters
-
-|Name | Description |
-|-----|------|
-|T: |Value type to parse to.|
 
 ## Properties
 
 ### Parsed\<T\>.Input
+Type: [System.String](https://msdn.microsoft.com/en-us/library/system.string.aspx)  
+Gets or sets the string to be parsed into a \<T\> value.
 
- Gets or sets the [[|T:System.String]] to be parsed into a \<T\> value. 
-
-
-
----
 ### Parsed\<T\>.HasValue
+Type: [System.Boolean](https://msdn.microsoft.com/en-us/library/system.boolean.aspx)  
+Gets a value indicating whether the current Parsed\<T\> object has a valid value of its underlying type.
 
- Gets a boolean indicating whether the current Parsed\<T\> object has a valid value of its underlying type. 
-
-
-
----
 ### Parsed\<T\>.Value
-
+Type: T  
 Gets the value of the current Parsed\<T\> object if it has been assigned a valid underlying value or parsable string.
-
-WARNING: Read-only property; using the setter will cause an exception.
-
-[[T:System.InvalidOperationException|T:System.InvalidOperationException]]: The HasValue property is false.
-
-[[T:System.NotSupportedException|T:System.NotSupportedException]]: The property is written to.
-
-
-
----
-
-
+#### Exceptions
+| Name | Condition |
+| --- | --- |
+| [InvalidOperationException](https://msdn.microsoft.com/en-us/library/system.invalidoperationexception.aspx) | The HasValue property is false. |
